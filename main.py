@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from scipy import stats
 from scipy.interpolate import interp1d
+import ED_logo
 
 # Create the main window
 root = tk.Tk()
@@ -22,6 +23,8 @@ median = None
 std_dev = None
 options = None
 settings_window = None
+task_index = None
+right_sub_frame = None
 
 root.title("EduVantage")
 root.geometry("1280x720")  # Change the window size to 1280x720
@@ -40,7 +43,7 @@ median_str = tk.StringVar()
 # Set the window icon
 image = Image.open("GUI/minilogo.png")
 photo = ImageTk.PhotoImage(image)
-ed_logo = tk.PhotoImage(file="GUI/ed_logo.png")
+ed_logo = ED_logo.get_photo_image4icon()
 root.iconphoto(False, photo)
 
 # Define the main frames
@@ -104,6 +107,8 @@ def switch_to_home():
 
 def switch_to_class():
     global windowmode
+    global task_index
+    global right_sub_frame
     windowmode = 1
     # Clear the center frame
     for widget in center_frame.winfo_children():
@@ -163,7 +168,7 @@ def switch_to_class():
 
     if len(grades_data[0]) > task_index:
         data = [row[task_index] for row in grades_data if pd.notna(row[task_index])]
-        counts, bins, patches = ax.hist(data, bins=50, density=True, alpha=0.6, color='g')
+        counts, bins, patches = ax.hist(data, bins=50, density=True, alpha=0.6, color='g', rwidth=1)
 
         # Plot the PDF.
         xmin, xmax = plt.xlim()
@@ -171,16 +176,6 @@ def switch_to_class():
         if mean is not None and std_dev is not None and task_index < len(mean) and task_index < len(std_dev):
             p = stats.norm.pdf(x, mean[task_index], std_dev[task_index])
             ax.plot(x, p, 'k', linewidth=2)
-
-        # Plot the line connecting the tops of the bars.
-        bin_centers = 0.5 * (bins[:-1] + bins[1:])
-
-        # Interpolate the data
-        f = interp1d(bin_centers, counts, kind='cubic')
-        xnew = np.linspace(bin_centers.min(), bin_centers.max(), 500)
-        y_smooth=f(xnew)
-
-        ax.plot(xnew, y_smooth, color='yellowgreen', linewidth=2)
 
     # Create a canvas and add it to the right sub-frame
     canvas = FigureCanvasTkAgg(fig, master=right_sub_frame)
@@ -200,6 +195,8 @@ def switch_to_class():
     bias_button = tk.Button(bottom_sub_frame, text="偏差", width=15)
     bias_button.pack(side="left", padx=10, pady=10)
 
+    rank_button.config(command=display_rank)
+    bias_button.config(command=switch_to_class)
     # Update the button states
     home_button.config(relief=tk.RAISED)
     class_button.config(relief=tk.SUNKEN)
@@ -247,7 +244,6 @@ def load_data_from_file():
         dropdown.set("課題を選択")
 
         print(grades_data)
-        switch_to_class()
     else:
         print("No file selected.")
     windowmode = 1
@@ -266,6 +262,7 @@ def close_settings():
     settings_window.destroy()
 
 def calculate_submission_count(grades_data, task_index):
+
     total_count = len(grades_data)
     # Count the number of non-NaN elements in the task_index column
     submission_count = sum(1 for row in grades_data if len(row) > task_index and pd.notna(row[task_index]))
@@ -313,6 +310,32 @@ def on_dropdown_change(event):
     else:
         switch_to_home()
 
+def display_rank():
+    global right_sub_frame
+    # Clear the right sub-frame
+    for widget in right_sub_frame.winfo_children():
+        widget.destroy()
+
+    # Create a listbox in the right sub-frame
+    listbox = tk.Listbox(right_sub_frame)
+    listbox.pack(fill="both", expand=True)
+
+    # Get the selected task
+    selected_option = dropdown.get()
+
+    if selected_option in options:
+        task_index = options.index(selected_option)
+        if task_index + 1 < len(options):
+            task_index += 1
+        else:
+            task_index = -1  # or any default value
+
+    # Create a list of tuples (ID, score) and sort it by score
+    score_list = sorted((row[0], row[task_index]) for row in grades_data if pd.notna(row[task_index]))
+
+    # Add the sorted scores to the listbox
+    for id, score in score_list:
+        listbox.insert(tk.END, f"ID: {id}, Score: {score}")
 
 # Attach the event handlers to the buttons
 home_button.config(command=switch_to_home)
