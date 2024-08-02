@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="81b54c12-d93d-4f05-8e2b-9b213f6316e5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ED_logo.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUI/minilogo.png" beforeDir="false" afterPath="$PROJECT_DIR$/GUI/minilogo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_loader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +89,8 @@
       <workItem from="1719792597435" duration="9000" />
       <workItem from="1720396792063" duration="72000" />
       <workItem from="1722090953406" duration="8000" />
-      <workItem from="1722090968922" duration="37145000" />
+      <workItem from="1722090968922" duration="37845000" />
+      <workItem from="1722223108963" duration="133000" />
     </task>
     <servers />
   </component>
@@ -113,7 +109,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/EduVantage$main.coverage" NAME="main のカバレッジ結果" MODIFIED="1722178022342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/EduVantage$main.coverage" NAME="main のカバレッジ結果" MODIFIED="1722223172078" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/EduVantage$data_loader.coverage" NAME="data_loader のカバレッジ結果" MODIFIED="1722166269895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/EduVantage$1.coverage" NAME="1 Coverage Results" MODIFIED="1719729240815" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
