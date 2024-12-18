@@ -360,7 +360,6 @@ def open_settings():
         if task not in ["全てのReport", "全てのExam", "SUM"]:
             task_button = tk.Button(task_frame, text=task, command=lambda i=i: open_task_dialog(i))
             task_button.pack(fill="x", padx=10, pady=5)
-
     # 評定セクション
     evaluation_frame = tk.LabelFrame(settings_window, text="評定", padx=10, pady=10)
     evaluation_frame.pack(fill="x", padx=10, pady=10)
